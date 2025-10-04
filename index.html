@@ -216,23 +216,41 @@
     }
 
     /* ---------------------------
-       MOBILE FIX OVERRIDE (place at end of style so it wins)
-       Keeps callout side-by-side on phones and shrinks avatar
+       MOBILE OVERRIDES (phones)
+       - Keep callout side-by-side
+       - Shrink avatar
+       - Nudge text up
+       - Prevent clipping by hero
     ----------------------------*/
     @media (max-width: 480px){
+      /* keep callout horizontal */
       .callout{
         flex-direction: row !important;
         align-items: center !important;
         gap: 12px !important;
       }
+      /* smaller avatar */
       .avatar-fixed{
         width: 112px !important;
         height: 112px !important;
         flex: 0 0 112px !important;
       }
-      .slides{ min-height: 0 !important }
-      .slide h3{ font-size: 18px }
+      /* move copy up a touch and guarantee enough height */
+      .slides{
+        position: relative;
+        top: -8px !important;
+        min-height: 150px !important; /* prevents cut text */
+        display: flex;
+        align-items: center;
+      }
+      .slide h3{ font-size: 18px; margin-top: 0 }
       .slide p{ font-size: 14px }
+
+      /* stop the hero from clipping the callout */
+      .hero{
+        overflow: visible !important;
+        padding-bottom: 20px; /* little breathing room */
+      }
     }
 
     @media (prefers-reduced-motion: reduce){
