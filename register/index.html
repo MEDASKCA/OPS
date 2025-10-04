@@ -6,12 +6,11 @@
   <title>Request access — MEDASKCA</title>
   <meta name="color-scheme" content="dark light"/>
 
-  <!-- Slim, modern font (Uber Move is proprietary; Manrope is a good free alternative) -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* --- reset / safety --- */
     *,*::before,*::after{box-sizing:border-box}
     html,body{height:100%}
 
@@ -46,15 +45,17 @@
       border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;
     }
 
-    .head{display:flex;gap:12px;align-items:center;padding:16px 18px;border-bottom:1px solid var(--line);
-          background:linear-gradient(180deg,var(--bg2),var(--card))}
-    .head img{height:26px;width:auto}
+    .head{
+      padding:16px 18px;border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,var(--bg2),var(--card));
+    }
+    .brandline{display:flex; align-items:center; gap:10px; margin:0 0 6px;}
+    .brandline img{height:26px;width:auto;display:block}
     .brand{font-weight:600;letter-spacing:.2px}
     .title{font-size:20px;margin:2px 0 0;font-weight:600}
     .lead{margin:6px 0 0;color:var(--muted);font-size:14px}
 
     .content{padding:18px}
-    /* New grid: no overlaps, adapts automatically */
     .grid{
       display:grid;
       grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
@@ -62,12 +63,35 @@
     }
 
     label{font-size:13px;color:var(--muted);margin:2px 0 6px;display:block;font-weight:500}
+
+    /* ---------- Unified control styling (fixes misalignment) ---------- */
     input,select,textarea{
-      width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:12px;
-      background:var(--input);color:var(--text);outline:none;transition:border-color .15s, box-shadow .15s;
+      width:100%;
+      padding:11px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:var(--input);
+      color:var(--text);
+      outline:none;
+      transition:border-color .15s, box-shadow .15s;
       font-weight:400;
+      font-size:14px;
+      min-height:44px;                 /* same height for inputs & selects */
     }
+    input::placeholder, textarea::placeholder{color:#95a8bf}
     input:focus,select:focus,textarea:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+
+    /* Custom arrow for select without changing height */
+    select{
+      -webkit-appearance:none; appearance:none;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 7l5 6 5-6' stroke='%239fb3c8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;
+      background-position:right 12px center;
+      background-size:14px;
+      padding-right:38px;
+    }
+
     textarea{min-height:112px;resize:vertical}
 
     .hint{font-size:12px;color:var(--muted);margin-top:6px}
@@ -95,12 +119,12 @@
   <div class="wrap">
     <div class="card">
       <div class="head">
-        <img src="/logo-medaskca.png" alt="MEDASKCA logo">
-        <div>
+        <div class="brandline">
+          <img src="/logo-medaskca.png" alt="MEDASKCA logo">
           <div class="brand">MEDASKCA</div>
-          <h1 class="title">Request access</h1>
-          <p class="lead">Tell us who you are. We’ll review and send a secure sign-in link once approved.</p>
         </div>
+        <h1 class="title">Request access</h1>
+        <p class="lead">Tell us who you are. We’ll review and send a secure sign-in link once approved.</p>
       </div>
 
       <div class="content">
@@ -152,10 +176,29 @@
             <textarea id="intent" name="intended_use" placeholder="Brief context helps us route your request."></textarea>
           </div>
 
-          <div style="grid-column:1 / -1">
+          <!-- Referral -->
+          <div>
             <label for="ref">How did you hear about MEDASKCA? (optional)</label>
-            <input id="ref" name="referral" placeholder="e.g., colleague, conference, search, social, other">
+            <select id="ref" name="referral">
+              <option value="">—</option>
+              <option>Colleague referral</option>
+              <option>Conference / event</option>
+              <option>Search engine (Google/Bing)</option>
+              <option>LinkedIn</option>
+              <option>X / Twitter</option>
+              <option>Academic paper / journal</option>
+              <option>NHS / Trust internal comms</option>
+              <option>Vendor / partner</option>
+              <option>Newsletter / email</option>
+              <option>Other</option>
+            </select>
           </div>
+
+          <div id="refOtherWrap" style="display:none">
+            <label for="ref_other">Please specify</label>
+            <input id="ref_other" name="referral_other" placeholder="Tell us where you heard about MEDASKCA">
+          </div>
+          <!-- /Referral -->
 
           <div class="actions" style="grid-column:1 / -1">
             <button id="submitBtn" type="submit">Request access</button>
@@ -175,9 +218,20 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
     const form = document.getElementById('accessForm');
     const msg  = document.getElementById('msg');
     const btn  = document.getElementById('submitBtn');
+
+    // Referral "Other" toggle
+    const ref = document.getElementById('ref');
+    const refOtherWrap = document.getElementById('refOtherWrap');
+    const refOther = document.getElementById('ref_other');
+    ref.addEventListener('change', () => {
+      const show = ref.value === 'Other';
+      refOtherWrap.style.display = show ? '' : 'none';
+      if (!show) refOther.value = '';
+    });
 
     function show(type, text){
       msg.className = type === 'ok' ? 'ok' : (type === 'error' ? 'error' : 'note');
@@ -210,19 +264,21 @@
       const intended_use = (form.intended_use.value || '').trim();
       const country = (form.country.value || '').trim();
       const referral = (form.referral.value || '').trim();
+      const referral_other = (form.referral_other?.value || '').trim();
 
       const fullName = [title, first, last].filter(Boolean).join(' ').trim();
+      const referralDisplay = referral === 'Other' && referral_other ? `Other - ${referral_other}` : referral;
+
       const notes = [
         role ? `Role: ${role}` : null,
         intended_use ? `Intended use: ${intended_use}` : null,
         country ? `Country: ${country}` : null,
-        referral ? `Referral: ${referral}` : null
+        referralDisplay ? `Referral: ${referralDisplay}` : null
       ].filter(Boolean).join(' | ');
 
       const payload = {
-        // structured (for future DB)
-        title, first_name:first, last_name:last, email, organisation, role, intended_use, country, referral,
-        // compatibility with Worker today
+        title, first_name:first, last_name:last, email, organisation, role, intended_use, country,
+        referral, referral_other,
         name: fullName,
         notes
       };
@@ -241,6 +297,7 @@
         }
         show('ok','Thanks! Your request has been received. We’ll email you when it’s approved.');
         form.reset();
+        refOtherWrap.style.display = 'none';
       }catch(err){
         show('error','Network error. Please try again.');
       }finally{
