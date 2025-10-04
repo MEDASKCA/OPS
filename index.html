@@ -207,12 +207,34 @@
       .hero{ min-height:520px; padding:24px 0 14px }
       .hero__glow{ opacity:.35; filter:blur(36px); width:88vw; height:24vh }
       .logo-sphere{ width:clamp(150px, 42vw, 210px) }
+      /* Previous mobile layout set column and made avatar 150px */
       .callout{ flex-direction:column; align-items:flex-start }
       .avatar-fixed{ width:150px; height:150px; flex:0 0 auto }
       .grid, .stats{ grid-template-columns:1fr }
       .two{ grid-template-columns:1fr }
       .cta{ padding:12px 18px }
     }
+
+    /* ---------------------------
+       MOBILE FIX OVERRIDE (place at end of style so it wins)
+       Keeps callout side-by-side on phones and shrinks avatar
+    ----------------------------*/
+    @media (max-width: 480px){
+      .callout{
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px !important;
+      }
+      .avatar-fixed{
+        width: 112px !important;
+        height: 112px !important;
+        flex: 0 0 112px !important;
+      }
+      .slides{ min-height: 0 !important }
+      .slide h3{ font-size: 18px }
+      .slide p{ font-size: 14px }
+    }
+
     @media (prefers-reduced-motion: reduce){
       .logo-sphere::before, .logo-sphere::after, .ticker{ animation:none !important }
       .slide, .panel{ transition:none }
