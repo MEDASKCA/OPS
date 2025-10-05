@@ -201,14 +201,42 @@
       .avatar-fixed{ width:200px; height:200px; flex:0 0 200px }
       .quotes{ grid-template-columns:1fr }
     }
+    /* ------------------------
+       MOBILE LAYOUT IMPROVEMENT
+       Keep desktop the same. On phones,
+       put avatar + flash text side-by-side
+       so he points *at* the text.
+       ------------------------ */
     @media (max-width: 480px){
       :root{ --gutter: 12px }
       .theme-toggle{ width:136px; height:98px; top:10px; right:10px }
       .hero{ min-height:520px; padding:24px 0 14px }
+
+      /* KEY CHANGES */
+      .callout{
+        flex-direction: row;        /* was column */
+        align-items: center;        /* vertical alignment */
+        gap: 12px;
+        padding: 10px 12px;
+        margin-top: 14px;           /* nudge closer under the CTA */
+      }
+      .avatar-fixed{
+        width:128px; height:128px;
+        flex:0 0 128px;             /* keep width fixed so text wraps beside */
+      }
+      .slides{
+        position:relative;
+        min-height:auto;            /* allow natural height */
+      }
+      .slide{ position:relative }    /* avoid absolute stacking on tiny screens */
+      .slide + .slide{ display:none }/* only show the active one when script toggles */
+      .slide .kicker{ font-size:12px }
+      .slide h3{ font:800 18px/1.2 Manrope; margin:2px 0 4px }
+      .slide p{ font-size:14px }
+
       .hero__glow{ opacity:.35; filter:blur(36px); width:88vw; height:24vh }
       .logo-sphere{ width:clamp(150px, 42vw, 210px) }
-      .callout{ flex-direction:column; align-items:flex-start }
-      .avatar-fixed{ width:150px; height:150px; flex:0 0 auto }
+
       .grid, .stats{ grid-template-columns:1fr }
       .two{ grid-template-columns:1fr }
       .cta{ padding:12px 18px }
