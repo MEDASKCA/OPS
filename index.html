@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
   <title>MEDASKCA – Theatre Ops, Reimagined</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#0b0d10;
@@ -45,7 +45,7 @@
       margin:0;
       background:var(--bg);
       color:var(--text);
-      font:15px/1.55 Inter,system-ui,Segoe UI,Roboto,Arial;
+      font:15px/1.55 Manrope,system-ui,Segoe UI,Roboto,Arial;
       -webkit-text-size-adjust:100%;
       touch-action:manipulation;
       overscroll-behavior-y:none;
@@ -67,7 +67,7 @@
       background:transparent; border:none; padding:0;
     }
     .theme-toggle:focus-visible{ outline:2px solid var(--blue); outline-offset:4px; border-radius:16px }
-    .theme-toggle svg{ width:100%; height:100%; display:block; transform:rotate(-35deg); transform-origin:75% 20% }
+    .theme-toggle svg{ width:100%; height:100%; display:block; transform:rotate(60 500 240); transform-origin:75% 20% }
     .theme-toggle .or-lens{ fill:var(--muted-strong); transition:fill .22s ease, filter .22s ease }
     .theme-toggle .or-glow{ opacity:0; transition:opacity .25s ease }
     [data-theme="light"] .theme-toggle .or-lens{
@@ -108,9 +108,9 @@
       mix-blend-mode:screen; filter:blur(8px); animation:specRoll 8s linear infinite; pointer-events:none;
     }
     @keyframes glowPulse{0%,100%{transform:scale(1); opacity:.9; filter:blur(38px)} 50%{transform:scale(1.08); opacity:1; filter:blur(46px)}}
-    @keyframes specRoll{0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)}}
+    @keyframes specRoll{0%{transform:rotate(60 500 240)} 100%{transform:rotate(60 500 240)}}
 
-    .hero h1{ font:800 clamp(28px, 6vw, 64px)/1.05 Poppins,Inter; letter-spacing:-.02em; margin:14px 0 8px }
+    .hero h1{ font:800 clamp(28px, 6vw, 64px)/1.05 Manrope; letter-spacing:-.02em; margin:14px 0 8px }
     .gradient-text{ background:linear-gradient(135deg,var(--teal),var(--blue)); -webkit-background-clip:text; background-clip:text; color:transparent }
     .hero p.lead{ max-width:920px; margin:8px auto 18px; color:var(--muted); font-size:clamp(14px,2.2vw,18px) }
     .cta{ display:inline-block; padding:14px 22px; border-radius:999px; font-weight:800; background:linear-gradient(135deg,var(--teal),var(--blue)); color:#061018;
@@ -127,7 +127,7 @@
     .slide{ position:absolute; inset:0; opacity:0; transform:translateY(10px); transition:opacity .45s ease, transform .45s ease }
     .slide.is-on{ opacity:1; transform:translateY(0) }
     .slide .kicker{ font-weight:800; font-size:14px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted-strong) }
-    .slide h3{ margin:4px 0 6px; font:800 22px/1.15 Poppins,Inter }
+    .slide h3{ margin:4px 0 6px; font:800 22px/1.15 Manrope }
     .slide p{ margin:0; color:var(--muted) }
 
     .liveops{ margin:18px auto 2px; padding:10px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden }
@@ -141,12 +141,12 @@
     section{ padding:36px 0 }
 
     .section-head{ text-align:center; margin:0 0 24px }
-    .section-head h2{ font:800 28px Poppins,Inter }
+    .section-head h2{ font:800 28px Manrope }
     .section-head p{ color:var(--muted) }
 
     .stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
     .stat{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; text-align:center }
-    .stat strong{ display:block; font:800 36px/1 Poppins,Inter; margin-bottom:6px; background:linear-gradient(135deg,var(--teal),var(--blue)); -webkit-background-clip:text; background-clip:text; color:transparent }
+    .stat strong{ display:block; font:800 36px/1 Manrope; margin-bottom:6px; background:linear-gradient(135deg,var(--teal),var(--blue)); -webkit-background-clip:text; background-clip:text; color:transparent }
     .stat span{ color:var(--muted) }
 
     .tabs{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:14px }
@@ -207,52 +207,12 @@
       .hero{ min-height:520px; padding:24px 0 14px }
       .hero__glow{ opacity:.35; filter:blur(36px); width:88vw; height:24vh }
       .logo-sphere{ width:clamp(150px, 42vw, 210px) }
-      /* Previous mobile layout set column and made avatar 150px */
       .callout{ flex-direction:column; align-items:flex-start }
       .avatar-fixed{ width:150px; height:150px; flex:0 0 auto }
       .grid, .stats{ grid-template-columns:1fr }
       .two{ grid-template-columns:1fr }
       .cta{ padding:12px 18px }
     }
-
-    /* ---------------------------
-       MOBILE OVERRIDES (phones)
-       - Keep callout side-by-side
-       - Shrink avatar
-       - Nudge text up
-       - Prevent clipping by hero
-    ----------------------------*/
-    @media (max-width: 480px){
-      /* keep callout horizontal */
-      .callout{
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 12px !important;
-      }
-      /* smaller avatar */
-      .avatar-fixed{
-        width: 112px !important;
-        height: 112px !important;
-        flex: 0 0 112px !important;
-      }
-      /* move copy up a touch and guarantee enough height */
-      .slides{
-        position: relative;
-        top: -8px !important;
-        min-height: 150px !important; /* prevents cut text */
-        display: flex;
-        align-items: center;
-      }
-      .slide h3{ font-size: 18px; margin-top: 0 }
-      .slide p{ font-size: 14px }
-
-      /* stop the hero from clipping the callout */
-      .hero{
-        overflow: visible !important;
-        padding-bottom: 20px; /* little breathing room */
-      }
-    }
-
     @media (prefers-reduced-motion: reduce){
       .logo-sphere::before, .logo-sphere::after, .ticker{ animation:none !important }
       .slide, .panel{ transition:none }
@@ -264,6 +224,7 @@
   <!-- Toggle -->
   <button class="theme-toggle" id="themeBtn" aria-label="Switch theme" aria-pressed="false" title="Toggle theme">
     <svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <g transform="rotate(60 500 240) translate(140,-100)">
       <g transform="translate(500,84)">
         <rect x="-26" y="-18" width="52" height="18" rx="6" fill="#b8c3cb"/>
         <rect x="-6"  y="0"   width="12" height="34" rx="6" fill="#b8c3cb"/>
@@ -286,7 +247,8 @@
         <ellipse class="or-lens" cx="-42" cy=" 26" rx="24" ry="18"/>
         <ellipse class="or-lens" cx=" 42" cy=" 26" rx="24" ry="18"/>
       </g>
-    </svg>
+      </g>
+</svg>
   </button>
 
   <!-- HERO -->
@@ -299,7 +261,7 @@
 
       <h1>Make your theatres run <span class="gradient-text">smarter</span> with MEDASKCA</h1>
       <p class="lead">Plan lists, coordinate logistics, staff with the right skills and improve with analytics. Everything in one flow.</p>
-      <a class="cta" href="/register">Request access</a>
+      <a class="cta" href="#contact">Request Access</a>
 
       <div class="callout" aria-label="Key benefits">
         <div class="avatar-fixed">
