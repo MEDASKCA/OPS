@@ -66,8 +66,8 @@
     /* Surgical lights / theme toggle — pinned in same corner on all screens */
 .theme-toggle{
   position: fixed;
-  top: calc(35px + env(safe-area-inset-top));   /* keeps away from notches */
-  right: calc(-55px + env(safe-area-inset-right)); /* negative = tuck further off edge */
+  top: calc(55px + env(safe-area-inset-top));   /* keeps away from notches */
+  right: calc(-45px + env(safe-area-inset-right)); /* negative = tuck further off edge */
   z-index: 60;
   width: 176px;
   height: 128px;
@@ -93,15 +93,15 @@
 @media (max-width: 720px){
   .theme-toggle{
     top: calc(35px + env(safe-area-inset-top)) !important;
-    right: calc(-55px + env(safe-area-inset-right)) !important;
+    right: calc(0px + env(safe-area-inset-right)) !important;
     width: 160px;
     height: 116px;
   }
 }
 @media (max-width: 480px){
   .theme-toggle{
-    top: calc(35px + env(safe-area-inset-top)) !important;
-    right: calc(-65px + env(safe-area-inset-right)) !important; /* tuck a bit more on tiny phones */
+    top: calc(40px + env(safe-area-inset-top)) !important;
+    right: calc(-35px + env(safe-area-inset-right)) !important; /* tuck a bit more on tiny phones */
     width: 132px;
     height: 96px;
   }
