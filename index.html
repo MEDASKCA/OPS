@@ -4,460 +4,245 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MEDASKCA — Coming Soon</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
-  :root{
-    --bg:#eef3f8;
-    --surface:#ffffff;
-    --surface-dark:#0f1720;
-    --text:#0c121a;
-    --muted:#5b6573;
-    --line:#d9e1ea;
-    --teal:#14b8a6;
-    --blue:#3b82f6;
-    --shadow:0 30px 80px rgba(2,6,23,.18);
-  }
+:root{
+  --text:#0c121a;
+  --muted:#5b6573;
+  --muted2:#6f7c8f;
+  --teal:#14b8a6;
+  --blue:#3b82f6;
+  --sky:#eaf6ff;
+  --sky2:#f5fbff;
+  --line:#dbe9f3;
+}
 
-  *{box-sizing:border-box;margin:0;padding:0}
-
-  body{
-    font-family:'Manrope',sans-serif;
-    min-height:100vh;
-    color:var(--text);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:20px;
-    overflow:hidden;
-    background:
-      radial-gradient(60% 50% at 78% 38%, rgba(59,130,246,.16) 0%, rgba(59,130,246,0) 58%),
-      radial-gradient(44% 38% at 22% 18%, rgba(20,184,166,.14) 0%, rgba(20,184,166,0) 58%),
-      linear-gradient(135deg, #fbfdff 0%, #f4f8fc 42%, #e8eef6 100%);
-    background-size:120% 120%, 120% 120%, 100% 100%;
-    animation:bgShift 18s ease-in-out infinite alternate;
-  }
-
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:
-      radial-gradient(60% 60% at 82% 50%, rgba(15,23,32,.18) 0%, rgba(15,23,32,.06) 35%, transparent 70%),
-      radial-gradient(70% 50% at 50% 110%, rgba(15,23,32,.08) 0%, transparent 70%);
-    animation:ambientFloat 20s ease-in-out infinite alternate;
-  }
-
-  body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    opacity:.12;
-    background-image:
-      linear-gradient(to right, rgba(12,18,26,.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(12,18,26,.04) 1px, transparent 1px);
-    background-size:28px 28px;
-    animation:gridDrift 30s linear infinite;
-  }
-
-  .container{
-    width:100%;
-    max-width:1100px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:60px;
-    padding:0 40px;
-    position:relative;
-    z-index:1;
-  }
-
-  .left{ max-width:430px; }
-
-  h1{
-    font-size:44px;
-    line-height:1.08;
-    font-weight:400;
-    margin-bottom:12px;
-    letter-spacing:-.01em;
-  }
-
-  .gradient{
-    background:linear-gradient(135deg,var(--teal),var(--blue));
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
-
-  p{
-    color:var(--muted);
-    margin-bottom:18px;
-    line-height:1.65;
-  }
-
-  .input-row{ display:flex; gap:10px; }
-
-  input{
-    flex:1;
-    padding:14px 16px;
-    border-radius:12px;
-    border:1px solid rgba(15,23,32,.08);
-    background:rgba(255,255,255,.78);
-    backdrop-filter:blur(10px);
-    color:var(--text);
-    font-size:14px;
-    box-shadow:0 8px 24px rgba(15,23,32,.05);
-  }
-
-  button{
-    padding:14px 18px;
-    border:none;
-    border-radius:12px;
-    font-weight:600;
-    background:linear-gradient(135deg,var(--teal),var(--blue));
-    color:#061018;
-    cursor:pointer;
-    box-shadow:0 10px 24px rgba(59,130,246,.18);
-  }
-
-  .right{
-    display:flex;
-    justify-content:center;
-    position:relative;
-  }
-
-  .right::before{
-    content:"";
-    position:absolute;
-    width:460px;
-    height:460px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(15,23,32,.22), rgba(59,130,246,.14), rgba(20,184,166,.10), transparent 68%);
-    filter:blur(38px);
-    z-index:-1;
-    animation:haloFloat 14s ease-in-out infinite alternate;
-  }
-
-  .phone::before{
-    content:"";
-    position:absolute;
-    inset:1px;
-    border-radius:43px;
-    pointer-events:none;
-    background:linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,0) 28%, rgba(255,255,255,.06) 52%, rgba(255,255,255,0) 72%);
-    opacity:.8;
-  }
-
-  
-
-  .phone{
-    width:286px;
-    height:584px;
-    border-radius:44px;
-    background:
-      linear-gradient(155deg, #15181d 0%, #07090c 26%, #1f242b 52%, #080b0f 100%);
-    box-shadow:
-      inset 0 0 0 1px rgba(255,255,255,.10),
-      inset 0 1px 0 rgba(255,255,255,.14),
-      inset 0 -10px 20px rgba(0,0,0,.28),
-      0 34px 90px rgba(2,6,23,.42),
-      0 12px 28px rgba(2,6,23,.18);
-    position:relative;
-    padding:10px;
-    transform:rotate(-2deg);
-  }
-
-  .screen{
-    width:100%;
-    height:100%;
-    border-radius:36px;
-    background:linear-gradient(180deg,#ffffff 0%, #f8fbfe 100%);
-    overflow:hidden;
-    position:relative;
-    box-shadow:
-      inset 0 0 0 1px rgba(15,23,32,.04),
-      inset 0 18px 30px rgba(255,255,255,.28);
-  }
-
-  .notch{
-    position:absolute;
-    top:10px;
-    left:50%;
-    transform:translateX(-50%);
-    width:124px;
-    height:34px;
-    background:linear-gradient(180deg,#0a0d12,#11161d);
-    border-radius:18px;
-    z-index:3;
-    box-shadow:0 2px 6px rgba(0,0,0,.26);
-  }
-
-  .notch::before{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:8px;
-    transform:translateX(-50%);
-    width:44px;
-    height:6px;
-    border-radius:999px;
-    background:rgba(255,255,255,.08);
-  }
-
-  .notch::after{
-    content:"";
-    position:absolute;
-    right:18px;
-    top:11px;
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:#1d2430;
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);
-  }
-
-  .ui-stage{
-    position:absolute;
-    inset:52px 0 0 0;
-    display:flex;
-    align-items:flex-start;
-    justify-content:flex-start;
-    flex-direction:column;
-    gap:16px;
-    padding-top:34px;
-  }
-
-  .logo-mark{
-    width:88px;
-    height:88px;
-    border-radius:50%;
-    overflow:hidden;
-    position:relative;
-    margin:0 auto;
-    animation:float 4s ease-in-out infinite;
-    box-shadow:0 12px 28px rgba(15,23,32,.12);
-  }
-
-  .logo-mark::before{
-    content:"";
-    position:absolute;
-    inset:-18%;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(20,184,166,.34), rgba(59,130,246,.24), transparent 72%);
-    filter:blur(18px);
-    z-index:0;
-  }
-
-  .logo-mark img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    position:relative;
-    z-index:1;
-    border-radius:50%;
-  }
-
-  .brand-lockup{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-  }
-
-  .brand-name{
-    font-size:14px;
-    letter-spacing:.18em;
-    color:#475569;
-  }
-
-  .tagline-rotator{
-    position:relative;
-    width:210px;
-    height:18px;
-    overflow:hidden;
-    margin:0 auto;
-  }
-
-  .tagline-rotator span{
-    position:absolute;
-    inset:0;
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-size:12px;
-    color:#7c8b9d;
-    letter-spacing:.1em;
-    opacity:0;
-    transform:translateY(6px);
-    animation:taglineFade 9s infinite;
-  }
-
-  .tagline-rotator span:nth-child(2){ animation-delay:3s; }
-  .tagline-rotator span:nth-child(3){ animation-delay:6s; }
-
-  @keyframes float{
-    0%{transform:translateY(0)}
-    50%{transform:translateY(-8px)}
-    100%{transform:translateY(0)}
-  }
-
-  @keyframes bgShift{
-    0%{background-position:0% 0%, 100% 0%, 0% 0%}
-    100%{background-position:10% 10%, 90% 18%, 0% 0%}
-  }
-
-  @keyframes ambientFloat{
-    0%{transform:translate3d(0,0,0) scale(1)}
-    100%{transform:translate3d(1.5%,-1.5%,0) scale(1.03)}
-  }
-
-  @keyframes gridDrift{
-    0%{transform:translate3d(0,0,0)}
-    100%{transform:translate3d(-14px,-14px,0)}
-  }
-
-  @keyframes haloFloat{
-    0%{transform:translate3d(0,0,0) scale(1)}
-    100%{transform:translate3d(1.5%,-2%,0) scale(1.04)}
-  }
-
-  @keyframes taglineFade{
-    0%, 8%{ opacity:0; transform:translateY(6px); }
-    14%, 28%{ opacity:1; transform:translateY(0); }
-    36%, 100%{ opacity:0; transform:translateY(-6px); }
-  }
-
-  @media(max-width:900px){
-    body{
-      padding-top:60px;
-      justify-content:flex-start;
-    }
-
-    .container{
-      flex-direction:column;
-      text-align:center;
-      gap:28px;
-      padding:0 20px;
-    }
-
-    .left{
-      max-width:100%;
-    }
-
-    h1{
-      font-size:34px;
-      line-height:1.15;
-    }
-
-    p{
-      font-size:14px;
-      line-height:1.6;
-      margin-bottom:14px;
-    }
-
-    .input-row{
-      flex-direction:column;
-      gap:10px;
-    }
-
-    input, button{
-      width:100%;
-    }
-
-    .right{
-      margin-top:10px;
-    }
-
-    .phone{
-      transform:none;
-      scale:0.95;
-    }
-
-    .ui-stage{
-      align-items:center;
-    }
-
-    .brand-lockup{
-      width:100%;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .tagline-rotator{
-      width:100%;
-      max-width:220px;
-      margin:
-  }
-    .left{max-width:560px}
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Manrope',sans-serif;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:auto;
+  background:
+    radial-gradient(60% 50% at 80% 30%, rgba(59,130,246,.14) 0%, rgba(59,130,246,0) 55%),
+    radial-gradient(45% 35% at 20% 20%, rgba(20,184,166,.12) 0%, rgba(20,184,166,0) 58%),
+    linear-gradient(135deg,#fcfeff,#eef7fc 55%,#e8f2f8);
+}
+.container{
+  display:flex;
+  align-items:center;
+  gap:64px;
+  padding:48px 24px;
+  max-width:1120px;
+  width:100%;
+}
+.left{max-width:460px}
+h1{font-size:44px;line-height:1.08;font-weight:400;margin-bottom:14px;letter-spacing:-.02em}
+.gradient{background:linear-gradient(135deg,var(--teal),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+p{color:var(--muted);margin-bottom:12px;line-height:1.65}
+.input-row{display:flex;gap:10px;margin-top:10px}
+input{flex:1;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:#fff;font:inherit}
+button{padding:14px 18px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--teal),var(--blue));font:600 14px 'Manrope',sans-serif;color:#07131a;cursor:pointer;box-shadow:0 10px 24px rgba(59,130,246,.14)}
+.right{display:flex;justify-content:center;position:relative}
+.right::before{
+  content:"";position:absolute;inset:auto;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle, rgba(59,130,246,.14), rgba(20,184,166,.10), transparent 65%);
+  filter:blur(34px);z-index:-1;
+}
+.phone{width:286px;background:#0b0f14;padding:10px;border-radius:40px;box-shadow:0 32px 80px rgba(15,23,42,.28)}
+.screen{background:linear-gradient(180deg,#ffffff,#f9fdff);border-radius:32px;min-height:590px;position:relative;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(15,23,42,.04)}
+.notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:122px;height:30px;background:#10151c;border-radius:16px;z-index:4}
+.ui-stage{padding:58px 14px 16px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.logo-mark{width:82px;height:82px;border-radius:50%;overflow:hidden;animation:float 4s ease-in-out infinite;box-shadow:0 10px 24px rgba(59,130,246,.12)}
+.logo-mark img{width:100%;height:100%;display:block;object-fit:cover}
+.brand-name{font-size:20px;letter-spacing:.2em;color:#334155}
+.tagline-rotator{position:relative;width:250px;height:22px;overflow:hidden}
+.tagline-rotator span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;font-size:15px;color:#64748b;letter-spacing:.04em;opacity:0;transform:translateY(6px);animation:taglineFade 9s infinite}
+.tagline-rotator span:nth-child(2){animation-delay:3s}.tagline-rotator span:nth-child(3){animation-delay:6s}
+.phone-showcase{width:100%;height:300px;position:relative;margin-top:6px}
+.mock-view{position:absolute;inset:0;opacity:0;transform:translateX(18px) scale(.985);animation:viewCycle 15s infinite}
+.mock-view:nth-child(2){animation-delay:5s}.mock-view:nth-child(3){animation-delay:10s}
+.card{background:linear-gradient(180deg,var(--sky2),var(--sky));padding:14px;border-radius:18px;margin-top:12px;border:1px solid var(--line);box-shadow:0 10px 22px rgba(59,130,246,.08)}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+.name-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.avatar{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--teal))}
+.name{font-weight:600;color:#0f172a}.role{font-size:11px;color:#5f7288}
+.action{color:var(--blue);text-decoration:underline;text-underline-offset:2px;font-size:12px;cursor:pointer;font-weight:600}
+.meta{font-size:12px;color:#64748b;margin-top:4px}
+.social-line{display:flex;gap:12px;font-size:11px;color:#64748b;margin-top:10px}
+.social-line span{display:inline-flex;align-items:center;gap:4px}
+.detail-block{margin-top:10px;padding-top:10px;border-top:1px solid #d8e8f3;display:grid;gap:8px}
+.detail-row{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#475569}
+.coord{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#0f172a}
+.map-panel{margin-top:10px;border-radius:16px;background:linear-gradient(180deg,#f8fdff,#eef8ff);border:1px solid #d7eaf6;padding:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
+.map-title{display:flex;justify-content:space-between;font-size:11px;color:#5f7288;margin-bottom:10px}
+.map-grid{height:84px;border-radius:12px;position:relative;overflow:hidden;background:
+ linear-gradient(to right, rgba(59,130,246,.08) 1px, transparent 1px),
+ linear-gradient(to bottom, rgba(20,184,166,.08) 1px, transparent 1px),
+ linear-gradient(180deg,#ffffff,#eef9ff);
+ background-size:18px 18px,18px 18px,100% 100%;}
+.map-point{position:absolute;width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--blue));box-shadow:0 0 0 4px rgba(59,130,246,.10)}
+.map-point.a{left:16%;top:30%}.map-point.z{right:14%;bottom:24%}
+.map-line{position:absolute;left:20%;top:38%;width:58%;height:2px;background:linear-gradient(90deg,var(--teal),var(--blue));transform:rotate(18deg);transform-origin:left center;opacity:.9}
+.tracker{position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--blue);box-shadow:0 0 0 5px rgba(59,130,246,.10);left:20%;top:36%;animation:routeMove 4s ease-in-out infinite}
+.map-legend{display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-top:8px}
+.analytics-panel{display:grid;gap:10px}
+.metric-row{display:flex;justify-content:space-between;align-items:flex-end}.metric-row b{font-size:13px;color:#0f172a}.metric-row span{font-size:20px;font-weight:600;color:#0f172a;letter-spacing:-.02em}
+.chart{height:110px;border-radius:16px;background:linear-gradient(180deg,#ffffff,#eef8ff);border:1px solid #d8e8f3;padding:12px;position:relative;overflow:hidden}
+.chart svg{width:100%;height:100%}.chart-tabs{display:flex;gap:14px;font-size:11px;color:#64748b;margin-bottom:8px}.chart-tabs span.active{color:#0f172a;font-weight:600}
+.chart-legend{display:flex;gap:14px;font-size:11px;color:#64748b;margin-top:8px}.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}.dot.blue{background:var(--blue)}.dot.teal{background:var(--teal)}
+.solari{border-radius:18px;background:linear-gradient(180deg,#f7fcff,#eef8ff);border:1px solid #d8e8f3;padding:14px;box-shadow:0 10px 22px rgba(59,130,246,.06)}
+.solari-head{display:flex;justify-content:space-between;font-size:11px;color:#5f7288;margin-bottom:10px}.solari-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 0;border-bottom:1px solid #d9e7f2;font-size:13px;color:#0f172a}.solari-row:last-child{border-bottom:none}.solari-value{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;animation:flipSoft 3s infinite}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+@keyframes taglineFade{0%,8%{opacity:0;transform:translateY(6px)}14%,30%{opacity:1;transform:translateY(0)}38%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes viewCycle{0%,26%{opacity:1;transform:translateX(0) scale(1)}34%,100%{opacity:0;transform:translateX(-18px) scale(.985)}}
+@keyframes flipSoft{0%,100%{transform:translateY(0);opacity:1}45%{transform:translateY(-5px);opacity:0}55%{transform:translateY(5px);opacity:0}}
+@keyframes routeMove{0%{left:20%;top:36%}50%{left:48%;top:47%}100%{left:73%;top:58%}}
+@media(max-width:900px){
+  body{align-items:stretch;justify-content:flex-start;padding-top:56px}
+  .container{flex-direction:column;text-align:center;gap:30px;padding:26px 18px 40px}
+  .left{max-width:none}
+  h1{font-size:36px}
+  p{font-size:14px}
+  .input-row{flex-direction:column}
+  .right{margin-top:4px}
+  .phone{width:100%;max-width:296px;margin:0 auto}
+  .screen{min-height:620px}
+  .tagline-rotator{width:100%;max-width:250px}
+}
 </style>
 </head>
-
 <body>
-
 <div class="container">
-
   <div class="left">
-    <h1>
-      Operations,<br>
-      <span class="gradient">made simple.</span>
-    </h1>
-
-    <p style="font-size:16px;line-height:1.7;color:#475569;margin-top:8px;">
-      A clear view of what matters now so teams can move faster and stay aligned.
-    </p>
-
-    <p style="font-size:14px;line-height:1.7;color:#64748b;">
-      Designed to reduce friction, surface change early, and keep work flowing with less effort.
-    </p>
-
-    <p>
-      Built for teams that need clarity, speed, and control.
-    </p>
-
+    <h1>Operations,<br><span class="gradient">made simple.</span></h1>
+    <p>A clear view of what matters now so teams can move faster and stay aligned.</p>
+    <p>Designed to reduce friction, surface change early, and keep work flowing with less effort.</p>
+    <p>Built for teams that need clarity, speed, and control.</p>
     <div class="input-row">
-      <input type="email" placeholder="Enter your email" />
+      <input placeholder="Enter your email">
       <button>Request access</button>
     </div>
   </div>
-
   <div class="right">
     <div class="phone">
       <div class="screen">
         <div class="notch"></div>
-
         <div class="ui-stage">
-          <div class="brand-lockup">
-            <div class="logo-mark">
-              <img src="https://raw.githubusercontent.com/MEDASKCA/OPS/main/logo-medaskca.png" alt="MEDASKCA logo">
-            </div>
+          <div class="logo-mark"><img src="https://raw.githubusercontent.com/MEDASKCA/OPS/main/logo-medaskca.png" alt="MEDASKCA logo"></div>
+          <div class="brand-name">MEDASKCA</div>
+          <div class="tagline-rotator" aria-label="tagline">
+            <span>Every case.</span>
+            <span>Every setting.</span>
+            <span>Every team.</span>
+          </div>
 
-            <div class="brand-name">MEDASKCA</div>
+          <div class="phone-showcase" aria-hidden="true">
+            <section class="mock-view">
+              <div class="card">
+                <div class="card-head">
+                  <div>
+                    <div class="name-line">
+                      <div class="avatar"></div>
+                      <span class="name">John</span>
+                      <span class="role">Team Leader</span>
+                    </div>
+                    <div class="meta">Assignment updated 2m ago</div>
+                  </div>
+                  <span class="action">Assigned</span>
+                </div>
+                <div class="social-line">
+                  <span>♥ 12</span>
+                  <span>💬 4</span>
+                  <span>↗ shared</span>
+                </div>
+              </div>
 
-            <div class="tagline-rotator" aria-label="tagline">
-              <span>Every case.</span>
-              <span>Every setting.</span>
-              <span>Every team.</span>
-            </div>
+              <div class="card">
+                <div class="card-head">
+                  <div>
+                    <div class="name-line">
+                      <div class="avatar" style="background:linear-gradient(135deg,var(--teal),var(--blue))"></div>
+                      <span class="name">Anne</span>
+                      <span class="role">Coordinator</span>
+                    </div>
+                    <div class="meta">Change confirmed</div>
+                  </div>
+                  <span class="action">Reviewed</span>
+                </div>
+                <div class="detail-block">
+                  <div class="detail-row"><span>Location route</span><span class="coord">A → Z</span></div>
+                </div>
+                <div class="map-panel">
+                  <div class="map-title"><span>Route update</span><span>Live</span></div>
+                  <div class="map-grid">
+                    <div class="map-point a"></div>
+                    <div class="map-line"></div>
+                    <div class="tracker"></div>
+                    <div class="map-point z"></div>
+                  </div>
+                  <div class="map-legend"><span>Storage A</span><span>Storage Z</span></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="mock-view">
+              <div class="card analytics-panel">
+                <div class="card-head" style="margin-bottom:0">
+                  <div>
+                    <div class="name-line">
+                      <div class="avatar" style="background:linear-gradient(135deg,var(--blue),var(--violet))"></div>
+                      <span class="name">System</span>
+                    </div>
+                    <div class="meta">Performance overview</div>
+                  </div>
+                  <span class="action">Opened</span>
+                </div>
+                <div class="metric-row"><b>Efficiency</b><span>78%</span></div>
+                <div class="metric-row"><b>Latency</b><span>11m</span></div>
+                <div class="chart">
+                  <div class="chart-tabs"><span class="active">Overview</span><span>Reporting</span><span>Trend</span></div>
+                  <svg viewBox="0 0 100 52" fill="none">
+                    <path d="M2 38 C12 30, 18 32, 28 26 S46 22, 56 20 S76 18, 98 11" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M2 44 C12 40, 18 39, 28 34 S46 31, 56 28 S76 26, 98 22" stroke="#14b8a6" stroke-width="2.2" stroke-linecap="round" opacity=".9"/>
+                  </svg>
+                  <div class="chart-legend"><span><i class="dot blue"></i>throughput</span><span><i class="dot teal"></i>timing</span></div>
+                </div>
+                <div class="social-line"><span>updated now</span><span>shared with 3 teams</span></div>
+              </div>
+            </section>
+
+            <section class="mock-view">
+              <div class="solari">
+                <div class="solari-head"><span>BOARD</span><span>LIVE</span></div>
+                <div class="solari-row"><span>EFFICIENCY</span><span class="solari-value">78%</span></div>
+                <div class="solari-row"><span>LATENCY</span><span class="solari-value">11m</span></div>
+                <div class="solari-row"><span>STATUS</span><span class="solari-value">READY</span></div>
+                <div class="solari-row"><span>ALIGNMENT</span><span class="solari-value">92%</span></div>
+              </div>
+              <div class="card">
+                <div class="card-head">
+                  <div>
+                    <div class="name-line">
+                      <div class="avatar"></div>
+                      <span class="name">John</span>
+                      <span class="role">Team Leader</span>
+                    </div>
+                    <div class="meta">Status note posted</div>
+                  </div>
+                  <span class="action">Commented</span>
+                </div>
+                <div class="social-line"><span>8 responses</span><span>2 mentions</span></div>
+              </div>
+            </section>
           </div>
         </div>
-
-      </div>
-
-      </div>
-
       </div>
     </div>
   </div>
-
 </div>
-
 </body>
 </html>
