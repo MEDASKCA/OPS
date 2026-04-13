@@ -100,21 +100,10 @@ h1 em {
 }
 .lead strong { color: #2b3a4a; font-weight: 600 }
 
-.input-row { display: flex; gap: 0; margin-top: 8px }
-input {
-  flex: 1;
-  padding: 14px 18px;
-  border: 1.5px solid var(--line);
-  border-right: none;
-  border-radius: 10px 0 0 10px;
-  background: #fff;
-  font: 14px 'Manrope', sans-serif;
-  color: var(--text);
-  outline: none;
-  transition: border-color .2s;
+.input-row {
+  display: flex;
+  margin-top: 8px;
 }
-input:focus { border-color: var(--teal) }
-input::placeholder { color: #9aaab8 }
 button {
   padding: 14px 22px;
   border-radius: 0 10px 10px 0;
@@ -485,6 +474,40 @@ button:hover { opacity: .88 }
 .site-footer a:hover {
   text-decoration: underline;
 }
+.top-nav {
+  position: absolute;
+  top: 28px;
+  right: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+.login-text {
+  font-size: 13px;
+  color: #7a8fa0;
+  font-weight: 600;
+}
+
+.login-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  font: 700 14px 'Manrope', sans-serif;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity .2s;
+}
+
+.login-link:hover {
+  opacity: .88;
+}
 @media (min-width: 1400px) {
   .container {
     max-width: 1280px;
@@ -510,26 +533,121 @@ button:hover { opacity: .88 }
 }
 /* ── RESPONSIVE ─────────────────── */
 @media (max-width: 920px) {
+  .top-nav {
+    position: static;
+    justify-content: center;
+    padding: 16px 20px 0;
+    gap: 6px;
+  }
+
+  .login-text {
+    display: inline;
+    font-size: 12px;
+  }
+
+  .login-link {
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--blue);
+    font: 700 12px 'Manrope', sans-serif;
+    text-decoration: none;
+  }
+
+  .login-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
   .page {
     align-items: flex-start;
     justify-content: flex-start;
-    padding-top: 48px;
+    padding-top: 24px;
   }
-  .container { flex-direction: column; text-align: center; gap: 36px; padding: 32px 20px 48px }
-  .left { max-width: none; width: 100% }
-  .input-row { flex-direction: column }
-  input { border-radius: 10px; border-right: 1.5px solid var(--line) }
-  button { border-radius: 10px }
-  input:focus { border-color: var(--teal) }
-  .right { width: 100%; justify-content: center }
-  .phone { width: 100%; max-width: 300px }
-  .screen { min-height: 620px }
-  .sub-note { justify-content: center }
-  .eyebrow { justify-content: center }
+
+  .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 36px;
+    padding: 32px 20px 48px;
+  }
+
+  .left {
+    max-width: none;
+    width: 100%;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  input {
+    border-radius: 10px;
+    border-right: 1.5px solid var(--line);
+  }
+
+  button {
+    border-radius: 10px;
+  }
+
+  input:focus {
+    border-color: var(--teal);
+  }
+
+  .right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .phone {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .screen {
+    min-height: 620px;
+  }
+
+  .sub-note {
+    justify-content: center;
+  }
+
+  .eyebrow {
+    justify-content: center;
+  }
+}
+footer {
+  margin-top: 48px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* 👇 PASTE IT HERE */
+.request-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  font: 700 14px 'Manrope', sans-serif;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity .2s;
+}
+
+.request-link:hover {
+  opacity: .88;
 }
 </style>
 </head>
 <body>
+
+<nav class="top-nav">
+  <span class="login-text">Already have access?</span>
+  <a class="login-link" href="https://tombymedaskca-alex-monterubios-projects.vercel.app/login">Log in</a>
+</nav>
 
 <div class="page">
   <div class="container">
@@ -545,8 +663,7 @@ button:hover { opacity: .88 }
       </p>
 
       <div class="input-row">
-        <input type="email" placeholder="Your email address">
-        <button>Request access</button>
+  <a class="request-link" href="https://medaskca.com/register/">Request access</a>
       </div>
       <div class="sub-note">
         <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
