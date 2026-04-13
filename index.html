@@ -782,8 +782,8 @@ h1 em {
 /* ── LOGIN NAV ─────────────────── */
 .top-nav {
   position: absolute;
-  top: 28px;
-  right: 48px;
+  top: 20px;
+  right: calc((100vw - 1100px) / 2 + 32px);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -819,6 +819,14 @@ h1 em {
   .container {
     max-width: 1280px;
     gap: 96px;
+  }
+
+  .top-nav {
+    right: calc((100vw - 1280px) / 2 + 32px);
+  }
+
+  .login-text {
+    font-size: 16px;
   }
 
   .left {
