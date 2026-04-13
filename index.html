@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MEDASKCA — Coming Soon</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#eef3f8;
+  --surface:#ffffff;
+  --surface-dark:#0f1720;
+  --text:#0c121a;
+  --muted:#5b6573;
+  --line:#d9e1ea;
+  --teal:#14b8a6;
+  --blue:#3b82f6;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Manrope',sans-serif;
+  min-height:100vh;
+  color:var(--text);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+  padding-top:60px;
+  background:
+    radial-gradient(60% 50% at 78% 38%, rgba(59,130,246,.16) 0%, rgba(59,130,246,0) 58%),
+    radial-gradient(44% 38% at 22% 18%, rgba(20,184,166,.14) 0%, rgba(20,184,166,0) 58%),
+    linear-gradient(135deg, #fbfdff 0%, #f4f8fc 42%, #e8eef6 100%);
+  background-size:120% 120%;
+  animation:bgShift 18s ease-in-out infinite alternate;
+}
+
+.container{
+  width:100%;
+  max-width:1100px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:60px;
+  padding:0 40px;
+}
+
+.left{ max-width:430px; }
+
+h1{
+  font-size:44px;
+  line-height:1.08;
+  font-weight:400;
+  margin-bottom:12px;
+}
+
+.gradient{
+  background:linear-gradient(135deg,var(--teal),var(--blue));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+p{
+  color:var(--muted);
+  margin-bottom:14px;
+  line-height:1.6;
+}
+
+.input-row{ display:flex; gap:10px; }
+
+input, button{
+  padding:14px;
+  border-radius:12px;
+  border:none;
+}
+
+input{
+  flex:1;
+  border:1px solid #e2e8f0;
+}
+
+button{
+  background:linear-gradient(135deg,var(--teal),var(--blue));
+  cursor:pointer;
+}
+
+.right{ display:flex; justify-content:center; }
+
+.phone{
+  width:280px;
+  height:560px;
+  border-radius:40px;
+  background:#0a0d12;
+  padding:10px;
+}
+
+.screen{
+  width:100%;
+  height:100%;
+  border-radius:32px;
+  background:white;
+  position:relative;
+}
+
+.notch{
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:120px;
+  height:30px;
+  background:#111;
+  border-radius:16px;
+}
+
+.ui-stage{
+  position:absolute;
+  inset:60px 0 0 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+}
+
+.logo-mark{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  overflow:hidden;
+  animation:float 4s ease-in-out infinite;
+}
+
+.logo-mark img{
+  width:100%;
+  height:100%;
+}
+
+.brand-name{
+  font-size:14px;
+  letter-spacing:.18em;
+  color:#475569;
+}
+
+.tagline-rotator{
+  position:relative;
+  width:200px;
+  height:18px;
+}
+
+.tagline-rotator span{
+  position:absolute;
+  width:100%;
+  text-align:center;
+  opacity:0;
+  animation:fade 9s infinite;
+}
+
+.tagline-rotator span:nth-child(2){animation-delay:3s;}
+.tagline-rotator span:nth-child(3){animation-delay:6s;}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+  100%{transform:translateY(0)}
+}
+
+@keyframes fade{
+  0%,10%{opacity:0}
+  20%,40%{opacity:1}
+  50%,100%{opacity:0}
+}
+
+@keyframes bgShift{
+  0%{background-position:0% 0%}
+  100%{background-position:10% 10%}
+}
+
+@media(max-width:900px){
+  .container{
+    flex-direction:column;
+    text-align:center;
+    padding:0 20px;
+  }
+
+  h1{font-size:32px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="left">
+    <h1>
+      Operations,<br>
+      <span class="gradient">made simple.</span>
+    </h1>
+
+    <p>A clear view of what matters now so teams can move faster and stay aligned.</p>
+    <p>Designed to reduce friction and keep work flowing.</p>
+
+    <div class="input-row">
+      <input type="email" placeholder="Enter your email" />
+      <button>Request access</button>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="phone">
+      <div class="screen">
+        <div class="notch"></div>
+
+        <div class="ui-stage">
+          <div class="logo-mark">
+            <img src="https://raw.githubusercontent.com/MEDASKCA/OPS/main/logo-medaskca.png">
+          </div>
+
+          <div class="brand-name">MEDASKCA</div>
+
+          <div class="tagline-rotator">
+            <span>Every case.</span>
+            <span>Every setting.</span>
+            <span>Every team.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
